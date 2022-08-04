@@ -18,17 +18,19 @@ time.sleep(randint(5,10)/5)
 driver.find_element(By.NAME, 'loginfmt').send_keys('renalexj@gmail.com'+Keys.ENTER)
 time.sleep(randint(10,20)/5)
 driver.find_element(By.NAME, 'passwd').send_keys('Swimguy1'+Keys.ENTER)
-time.sleep(randint(3,5))
+time.sleep(randint(2,4))
 driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
-time.sleep(randint(3,5))
+time.sleep(randint(2,4))
 # Generate words for the day
 r=RandomWords()
 
 for i in range(1,40):
     word=r.get_random_word()
+    while word is None:
+        word=r.get_random_word()
     print(word)
     search_box=driver.find_element(By.ID,'sb_form_q')
     search_box.clear()
     search_box.send_keys(word)
     search_box.send_keys(Keys.RETURN)
-    time.sleep(randint(4,6))
+    time.sleep(randint(1,3))
