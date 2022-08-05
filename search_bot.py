@@ -28,7 +28,7 @@ for i in range(1,40):
     word=r.get_random_word()
     while word is None:
         word=r.get_random_word()
-    print(word)
+    print(str(i)+" "+word)
     search_box=driver.find_element(By.ID,'sb_form_q')
     search_box.clear()
     search_box.send_keys(word)
