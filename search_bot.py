@@ -9,7 +9,7 @@ import time
 url = 'https://www.bing.com/'
 # Chrome
 options = webdriver.ChromeOptions()
-option.add_argument('headless')
+option.set_headless()
 driver = webdriver.Chrome('E:\Driver\chromedriver_win32\chromedriver', chrome_options=options)
 driver.get(url)
 time.sleep(5)
