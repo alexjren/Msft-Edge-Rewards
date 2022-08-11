@@ -30,16 +30,21 @@ r=RandomWords()
 
 
 while True:
-    while datetime.time(16,0,0)<=datetime.datetime.now().time()<=datetime.time(17,0,0):
-        for i in range(1,40):
+    date=datetime.date(1,1,1)
+    datetime1=datetime.datetime.combine(date,datetime.time(16,0,0))
+    datetime2=datetime.datetime.combine(date,datetime.datetime.now().time())
+    sleeptime=datetime1-datetime2
+    stoptime=sleeptime.total_seconds()
+    if stoptime<0:
+        stoptime=(sleeptime+datetime.timedelta(days=1)).total_seconds()
+    time.sleep(stoptime)
+    for i in range(1,40):
+        word=r.get_random_word()
+        while word is None:
             word=r.get_random_word()
-            while word is None:
-                word=r.get_random_word()
-            print(str(i)+" "+word)
-            search_box=driver.find_element(By.ID,'sb_form_q')
-            search_box.clear()
-            search_box.send_keys(word)
-            search_box.send_keys(Keys.RETURN)
-            time.sleep(randint(1,3))
-        while datetime.datetime.now().time()<=datetime.time(17,0,0):
-            time.sleep(1)
+        print(str(i)+" "+word)
+        search_box=driver.find_element(By.ID,'sb_form_q')
+        search_box.clear()
+        search_box.send_keys(word)
+        search_box.send_keys(Keys.RETURN)
+        time.sleep(randint(1,3))
