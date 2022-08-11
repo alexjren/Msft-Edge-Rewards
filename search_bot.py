@@ -5,12 +5,14 @@ from selenium.webdriver.support.ui import Select
 from random_word import RandomWords
 from random import randint
 import time
+import datetime
 
 url = 'https://www.bing.com/'
 # Chrome
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 driver = webdriver.Chrome('E:\Driver\chromedriver_win32\chromedriver', chrome_options=options)
+#driver = webdriver.Chrome('E:\Driver\chromedriver_win32\chromedriver')
 driver.get(url)
 time.sleep(5)
 
@@ -26,13 +28,18 @@ time.sleep(randint(2,4))
 # Generate words for the day
 r=RandomWords()
 
-for i in range(1,40):
-    word=r.get_random_word()
-    while word is None:
-        word=r.get_random_word()
-    print(str(i)+" "+word)
-    search_box=driver.find_element(By.ID,'sb_form_q')
-    search_box.clear()
-    search_box.send_keys(word)
-    search_box.send_keys(Keys.RETURN)
-    time.sleep(randint(1,3))
+
+while True:
+    while datetime.time(16,0,0)<=datetime.datetime.now().time()<=datetime.time(17,0,0):
+        for i in range(1,40):
+            word=r.get_random_word()
+            while word is None:
+                word=r.get_random_word()
+            print(str(i)+" "+word)
+            search_box=driver.find_element(By.ID,'sb_form_q')
+            search_box.clear()
+            search_box.send_keys(word)
+            search_box.send_keys(Keys.RETURN)
+            time.sleep(randint(1,3))
+        while datetime.datetime.now().time()<=datetime.time(17,0,0):
+            time.sleep(1)
